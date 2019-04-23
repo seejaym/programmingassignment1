@@ -3,6 +3,8 @@
 int main(){
 	//int a=0,b=1,c=2,d=3,e=4,f=5,g=6,h=7,i=8,j=9,k=10,l=11,m=12,n=13,o=14,p=15,q=16,r=17,s=18,t=19,u=20,v=21,w=22,x=23,y=24,z=25;
 	//int A=26,B=27,C=28,D=29,E=30,F=31,G=32,H=33,I=34,J=35,K=36,L=37,M=38,N=39,O=40,P=41,Q=42,R=43,S=44,T=45,U=46,V=47,W=48,X=49,Y=50,Z=51;
+
+	char crackrotation[]={"TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."};
 	char message[1000], characters;				//declares message array, characters
 	char plain[]={"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};		//declares plain key for substitution cipher
 	char key[] = {"QWERTYUIOPASDFGHJKLZXCVBNM"};		//default key for substitution cipher
@@ -12,7 +14,7 @@ int main(){
 	printf("Task 2: Rotation Cipher Decryption\n");		//display message for rotation cipher 2 decyption
 	printf("Task 3: Substitution Cipher Encryption\n");	//display message for substitution cipher encryption
 	printf("Task 4: Substitution Cipher Decryption\n");	//display message for cipher decrytion
-	printf("Task 5: Rotation Cipher Encryption, Text Only\n");//display message for cipher encryption, text only provided
+	printf("Task 5: Rotation Cipher Decryption, Text Only\n");//display message for cipher encryption, text only provided
 	printf("Task 6: Substitution Cipher Decryption, Text Only\n");//display message for cipher decryption, text only provided
 	printf("Exit 7: Exit Program\n");			//display message for exit condition of program
 	printf("Enter Task Number Here: ");			//prints message to enter in task number
@@ -28,27 +30,23 @@ int main(){
 			printf("Enter Key: ");
 			scanf("%d", &userdefinedkey);
 	
-			for (i = 0; message[i] != '\0'; i++){
-	   			characters = message[i];
-				if (characters >= 'a' && characters <= 'z'){
-					characters = characters - 97;
-	   				characters = (characters + userdefinedkey)%26;
-	  					if (characters > 'z'){
-	  						characters = characters - 'z' + 'a' - 1;
-						}
-					characters = characters + 97;
-					message[i] = characters;
-				}
-				else if(characters >= 'A' && characters <= 'Z'){
-					characters = characters - 65;
-					characters = (characters + userdefinedkey)%26;
-							if (characters > 'Z'){
-								characters = characters - 'Z' + 'A' - 1;
-							}
-					characters = characters + 65;
-					message[i] = characters;
-				}
-       			}
+			for (i = 0; message[i] != '\0'; i++)
+		            {
+			     if (message[i] >= 'a' && message[i] <='z')
+				{
+				 message[i] = message[i] - 32;
+			        }
+		             if (message[i] >= 'A' && message[i] <='Z')
+				{
+				 message[i] = message[i] + userdefinedkey%26;
+			         if (message[i] > 'Z' ) 
+				   {
+			            message[i]= message[i] - 26;
+				    }
+			       }	
+			     }
+		//if the letter in array passes the value of z, need to get back to a straight away
+			    		
        			printf("Encrypted Message: %s \n", message);
 			return main();
        		break;
@@ -58,28 +56,24 @@ int main(){
 			stdin = freopen(NULL,"r",stdin);
 			printf("Enter key: ");
 			scanf("%d", &userdefinedkey);
-	
-			for (i = 0; message[i] != '\0'; i++){
-	   			characters = message[i];
-				if (characters >= 'a' && characters <= 'z'){
-					characters = characters - 97;
-	   				characters = (characters - userdefinedkey)%26;
-	  					if (characters < 'a'){
-	  						characters = characters + 'z' - 'a' + 1;
-						}
-					characters = characters + 97;
-					message[i] = characters;
-				}
-				else if(characters >= 'A' && characters <= 'Z'){
-					characters = characters - 65;
-						characters = (characters - userdefinedkey)%26;
-							if (characters < 'A'){
-								characters = characters + 'Z' - 'A' + 1;
-							}
-					characters = characters + 65;
-					message[i] = characters;
-				}
-       			}
+			stdin = freopen(NULL,"r",stdin);
+			
+			for (i = 0; message[i] != '\0'; i++)
+		            {
+			     if (message[i] >= 'a' && message[i] <='z')
+				{
+				 message[i] = message[i] - 32;
+			        }
+		             if (message[i] >= 'A' && message[i] <='Z')
+				{
+				 message[i] = message[i] - userdefinedkey%26;
+			         if (message[i] < 'A' ) 
+				   {
+			            message[i]= message[i] + 26;
+				    }
+			        }
+			      }
+	   			
        			printf("Decrypted Message: %s \n", message);
 			return main();
        		break;					
@@ -170,27 +164,39 @@ int main(){
 		       printf("Decrypted Message: %s \n\n", message);
 		       return main();
 		break;
-		case 5:
-			printf("Enter A Message To Decrypt: ");
-			scanf("%[^\n]s", message);
-			userdefinedkey = 4;
-			
-	
-			for (i = 0; message[i] != '\0'; i++){
-	   			characters = message[i];
-				 if(characters >= 'A' && characters <= 'Z'){
+       		case 5:
+			//printf("Enter A Message To Decrypt: ");
+			//scanf("%[^\n]s", message);
+			//stdin = freopen(NULL,"r",stdin);
+			//printf("Enter key: ");
+			//scanf("%d", &userdefinedkey);
+			userdefinedkey = 1;
+			for (i = 0; crackrotation[i] != '\0'; i++){
+	   			characters = crackrotation[i];
+				if ((message[i] < 'A') || (message[i]> 'Z' && message[i]< 'a') ||(message[i] > 'z'))
+					{message[i]=message[i];}
+				if (characters >= 'a' && characters <= 'z'){
+					characters = characters - 97;
+	   				characters = (characters - userdefinedkey)%26;
+	  					if (characters < 'a'){
+	  						characters = characters + 'z' - 'a' + 1;
+						}
+					characters = characters + 97;
+					crackrotation[i] = characters;
+				}
+				if(characters >= 'A' && characters <= 'Z'){
 					characters = characters - 65;
 						characters = (characters - userdefinedkey)%26;
 							if (characters < 'A'){
 								characters = characters + 'Z' - 'A' + 1;
 							}
 					characters = characters + 65;
-					message[i] = characters;
+					crackrotation[i] = characters;
 				}
        			}
-       			printf("Decrypted Message: %s \n", message);
+       			printf("Decrypted Message: %s \n", crackrotation);
 			return main();
-		break;
+       		break;					
 		case 6:
 		break;
 		case 7: return 0;
