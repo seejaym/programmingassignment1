@@ -44,12 +44,16 @@ main ()
 	    {
 	      message[i] = message[i] - 32;
 	    }
-	  else if (message[i] >= 'A' && message[i] <= 'Z')
+	  if (message[i] >= 'A' && message[i] <= 'Z')
 	    {
+	      message[i] = message[i] + userdefinedkey % 26;
 	      if (message[i] > 'Z')
 		{
 		  message[i] = message[i] - 26;
-		  message[i] = message[i] + userdefinedkey % 26;
+		}
+	      else if (message[i] < 'A')
+		{
+		  message[i] = message[i] + 26;
 		}
 	    }
 	  else
@@ -57,7 +61,6 @@ main ()
 	      message[i] = message[i];
 	    }
 	}
-
       printf ("Encrypted Message: %s \n", message);
       return main ();
     case 2:
@@ -77,7 +80,11 @@ main ()
 	  if (message[i] >= 'A' && message[i] <= 'Z')
 	    {
 	      message[i] = message[i] - userdefinedkey % 26;
-	      if (message[i] < 'A')
+	      if (message[i] > 'Z')
+		{
+		  message[i] = message[i] - 26;
+		}
+	      else if (message[i] < 'A')
 		{
 		  message[i] = message[i] + 26;
 		}
@@ -87,9 +94,6 @@ main ()
 	      message[i] = message[i];
 	    }
 	}
-
-
-      printf ("Encrypted Message: %s \n", message);
 //a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
       printf ("Decrypted Message: %s \n", message);
       return main ();
@@ -99,7 +103,7 @@ main ()
       scanf ("%[^\n]s", message);
       stdin = freopen (NULL, "r", stdin);
       printf ("Enter A Key: \n");
-      scanf ("%[^\n]s", key);
+      scanf ("%[^\n]", key);
 
       for (int i = 0; i < 25; i++)
 	if (key[i] >= 'a' && key[i] <= 'z')
@@ -129,10 +133,10 @@ main ()
     case 4:
       printf ("Substitution Decryption\n");
       printf ("Enter A Message To Decrypt: \n");
-      scanf ("%[^\n]s", message);
+      scanf ("%[^\n]", message);
       stdin = freopen (NULL, "r", stdin);
       printf ("Enter A Key: \n");
-      scanf ("%[^\n]s", key);
+      scanf ("%[^\n]", key);
       for (int i = 0; i < 1000; i++)
 	{
 	  if (message[i] == ' ')
@@ -253,39 +257,27 @@ main ()
       //stdin = freopen(NULL,"r",stdin);
       //printf("Enter key: ");
       //scanf("%d", &userdefinedkey);
-      userdefinedkey = 1;
-      for (i = 0; crackrotation[i] != '\0'; i++)
+      int userdefinedkey = 0;
+      for (userdefinedkey = 0; userdefinedkey < 26; userdefinedkey++)
 	{
-	  characters = crackrotation[i];
-	  if ((message[i] < 'A') || (message[i] > 'Z' && message[i] < 'a')
-	      || (message[i] > 'z'))
+	  for (i = 0; crackrotation[i] != '\0'; i++)
 	    {
-	      message[i] = message[i];
-	    }
-	  if (characters >= 'a' && characters <= 'z')
-	    {
-	      characters = characters - 97;
-	      characters = (characters - userdefinedkey) % 26;
-	      if (characters < 'a')
+	      if (crackrotation[i] < 'A' || crackrotation[i] > 'Z')
 		{
-		  characters = characters + 'z' - 'a' + 1;
+		  crackrotation[i] = crackrotation[i];
 		}
-	      characters = characters + 97;
-	      crackrotation[i] = characters;
-	    }
-	  if (characters >= 'A' && characters <= 'Z')
-	    {
-	      characters = characters - 65;
-	      characters = (characters - userdefinedkey) % 26;
-	      if (characters < 'A')
+	      else
 		{
-		  characters = characters + 'Z' - 'A' + 1;
+		  crackrotation[i] = crackrotation[i] + userdefinedkey;
+		  if (crackrotation[i] > 'Z')
+		    {
+		      crackrotation[i] = crackrotation[i] - 26;
+		    }
 		}
-	      characters = characters + 65;
-	      crackrotation[i] = characters;
 	    }
 	}
-      printf ("Decrypted Message: %s \n", crackrotation);
+      //printf ("Decrypted Message: %d%s \n", userdefinedkey, crackrotation);  
+      //printf ("Decrypted Message: %s \n", crackrotation);
       return main ();
     case 6:
       printf ("Substitution Decryption, Text Only\n");
@@ -297,3 +289,4 @@ main ()
       printf ("enter a number\n");
     }
 }
+
