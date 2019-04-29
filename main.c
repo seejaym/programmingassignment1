@@ -3,348 +3,349 @@
 int
 main ()
 {
-  //char crackrotation[] = {"TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."
-  //};
-  char crackrotation[] =
-    {
-"SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"
-};
-  char message[500], characters;	//declares message array, characters
+  char crackrotation[] = {
+    "TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."
+  };
+
+  //char crackrotation[] = {"SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"};       
+  char message[500];		//declares message array, characters
   char plain[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };	//declares plain key for substitution cipher
   char key[] = { "QWERTYUIOPASDFGHJKLZXCVBNM" };	//default key for substitution cipher
   int i, userdefinedkey, tasknumber;	//declare integers i, userdefinedkey, tasknumber
   int fA = 0, fB = 0, fC = 0, fD = 0, fE = 0, fF = 0, fG = 0, fH = 0, fI = 0, fJ = 0, fK = 0, fL = 0, fM = 0, fN = 0, fO = 0, fP = 0, fQ = 0, fR = 0, fS = 0, fT = 0, fU = 0, fV = 0, fW = 0, fX = 0, fY = 0, fZ = 0;	//variables for each letter counter 
+  int crackkey = 0;
+  int totalLetters = fA + fB + fC + fD + fE + fF + fG + fH + fI + fJ + fK + fL + fM + fN + fO + fP + fQ + fR + fS + fT + fU + fV + fW + fX + fY + fZ;	//sums the total number of letters, stores value in totalLetters
+  printf ("Enter Number For Corresponding Option\n");	//display message for user to enter corresponding task
+  printf ("1 Rotation Cipher Encrption\n");	//display message for rotation cipher encryption
+  printf ("2 Rotation Cipher Decryption\n");	//display message for rotation cipher decryption
+  printf ("3 Substitution Cipher Encryption\n");	//display message for substitution cipher encryption
+  printf ("4 Substitution Cipher Decryption\n");	//display message for cipher decrytion
+  printf ("5 Rotation Cipher Decryption, No Key\n");	//display message for cipher decrytion
+  printf ("6 Exit Program\n");	//display message for exit condition of program
+  printf ("Enter Option Here: ");	//prints message to enter in task number
 
-  int zero = 0;
-  printf ("Enter Number For Corresponding Task\n");	//display message for user to enter corresponding task
-  printf ("Task 1: Rotation Cipher Encrption\n");	//display message for rotation cipher 1 encryption
-  printf ("Task 2: Rotation Cipher Decryption\n");	//display message for rotation cipher 2 decyption
-  printf ("Task 3: Substitution Cipher Encryption\n");	//display message for substitution cipher encryption
-  printf ("Task 4: Substitution Cipher Decryption\n");	//display message for cipher decrytion
-  printf ("Task 5: Rotation Cipher Decryption, Text Only\n");	//display message for cipher encryption, text only provided
-  printf ("Task 6: Substitution Cipher Decryption, Text Only\n");	//display message for cipher decryption, text only provided
-  printf ("Exit 7: Exit Program\n");	//display message for exit condition of program
-  printf ("Enter Task Number Here: ");	//prints message to enter in task number
-
-  scanf ("%d", &tasknumber);	//scans for task number entered
-  if (tasknumber < 1 || tasknumber > 7)	//checks if number entered is less than 1 or greater than 7
+  scanf ("%d", &tasknumber);	//scans for task number entered and stores it in the tasknumber variable
+  if (tasknumber < 1 || tasknumber > 6)	//checks if the number entered in taskvariable is less than one or greater than five
     {
-      return main ();		//loops back to main if number is out of range
+      return main ();		//loops back to main menu if number is out of range
     }
   stdin = freopen (NULL, "r", stdin);	//resets stdin memory , without this the switch case will not work properly
-  switch (tasknumber)
+  switch (tasknumber)		//this switchcase contains 5 options, 4 which are tasks and one which
     {
-    case 1:
-      printf ("Rotation Encryption\nEnter A Message To Encrypt:\n");
-      scanf ("%[^\n]", message);
-      stdin = freopen (NULL, "r", stdin);
-      printf ("Enter Key: ");
-      scanf ("%d", &userdefinedkey);
-      for (i = 0; message[i] != '\0'; i++)
+    case 1:			//this case is for the rotation encryption
+      printf ("Rotation Encryption\nEnter A Message To Encrypt:\n");	// lets the user know that rotation encryption has been selected and a message to be encrypted can be typed
+      scanf ("%[^\n]", message);	// scans for typed message from user
+      stdin = freopen (NULL, "r", stdin);	// clears the std input memory so a key can be entered
+      printf ("Enter Key: ");	// tells the user to enter in a key
+      scanf ("%d", &userdefinedkey);	// scans for the key
+      for (i = 0; message[i] != '\0'; i++)	//this loop runs character by character until the end of the string(NULL) is found
 	{
-	  if (message[i] >= 'a' && message[i] <= 'z')
+	  if (message[i] >= 'a' && message[i] <= 'z')	//checks if the character ascii value is in the lower case range
 	    {
-	      message[i] = message[i] - 32;
+	      message[i] = message[i] - 32;	//if lowercase is found the character is shifted to its uppercase 
 	    }
-	  if (message[i] >= 'A' && message[i] <= 'Z')
+	  if (message[i] >= 'A' && message[i] <= 'Z')	//checks if character ascii value is in the uppercase range
 	    {
-	      message[i] = message[i] + userdefinedkey % 26;
-	      if (message[i] > 'Z')
+	      message[i] = message[i] + userdefinedkey % 26;	//if character is upper case the character positively shifted by the entered in key, the %26(modulus 26) returns the remainder of the key so if the rotation gets around the alphabet(0), it resets back to zero and starts again
+	      if (message[i] > 'Z')	// condition checking if the shifted character is above the ascii value of Z
+		{
+		  message[i] = message[i] - 26;	//if the shifted character is greater than the value of Z, 26 is minused off to get it back in the character range of A-Z
+		}
+	      if (message[i] < 'A')	// condition checking if the shifted character is below the ascii value of A
+		{
+		  message[i] = message[i] + 26;	//if the shifted character is lower than the value o A, 26 is added on to get it back in the character range of A-Z 
+		}
+	    }
+	  else			// this is executed when the character is not an uppercase character 
+	    {
+	      message[i] = message[i];	// if the character is not in the range A-Z, then the character remains the same, eg "?" = "?" 
+	    }
+	}
+      printf ("Encrypted Message: %s \n", message);	//prints the rotated message to the user
+      return main ();		//returns back to the main menu
+    case 2:			//this case is for the rotation decryption
+      printf ("Rotation Decryption\nEnter A Message To Decrypt:\n");	//tells user that rotation decryption has been selected and prompts user to enter in a message to decrypt
+      scanf ("%[^\n]", message);	//scans for a entered message and stores it in the message string
+      stdin = freopen (NULL, "r", stdin);	//clears the std input memory so a key can be entered
+      printf ("Enter Key: ");	//prompts user to enter in a key
+      scanf ("%d", &userdefinedkey);	//scans for an entered key integer and stores the value in userdefined key
+
+      for (i = 0; message[i] != '\0'; i++)	//this loop runs character by character until the string ends (NULL, \0 is found)
+	{
+	  if (message[i] >= 'a' && message[i] <= 'z')	// checks if the message character is lower case
+	    {
+	      message[i] = message[i] - 32;	// if the messsage character is lower case, it is converted to its upper case
+	    }
+	  if (message[i] >= 'A' && message[i] <= 'Z')	// checks if the character is in the ascii range of A-Z
+	    {
+	      message[i] = message[i] - userdefinedkey % 26;	//if the character is in range, it is negatively shifted by the key, %26(modulus 26) returns the remainder of the key so that if the shift is greater than 26, the key returns back to 0
+	      if (message[i] > 'Z')	//if the shifted character above the value of a, 26 is minused off to get the character back in the range of A-Z
 		{
 		  message[i] = message[i] - 26;
 		}
-	      if (message[i] < 'A')
+	      else if (message[i] < 'A')	//if the shifted character is below the ascii value of A, 26 is minused off to get the character back in the range of A-Z
 		{
-		  message[i] = message[i] + 26;
+		  message[i] = message[i] + 26;	//if the shifted character below the ascii value of A, 26 is added on to get the character back in the range of A-Z
 		}
 	    }
-	  else
+	  else			// this is executed when the character is not an uppercase character
 	    {
-	      message[i] = message[i];
+	      message[i] = message[i];	// if the character is not in the range A-Z, then the character remains the same, eg "?" = "?"
 	    }
 	}
-      printf ("Encrypted Message: %s \n", message);
-      return main ();
-    case 2:
-      printf ("Rotation Decryption\nEnter A Message To Decrypt:\n");
-      scanf ("%[^\n]", message);
-      stdin = freopen (NULL, "r", stdin);
-      printf ("Enter Key: ");
-      scanf ("%d", &userdefinedkey);
-
-      for (i = 0; message[i] != '\0'; i++)
+      printf ("Decrypted Message: %s \n", message);	//displays decrypted message to the user
+      return main ();		//returns back to main menu
+    case 3:			//this case is for the substition encryption
+      printf ("Substitution Encryption\nEnter A Message To Encrypt:\n");	//displays message that substitution encryption has been selected, prompts the user to enter in message to encrypt 
+      scanf ("%[^\n]", message);	//scans for entered in text and stores it in message
+      printf ("The Encryption Key Is: %s \n", key);	//prints the key used for the substitution
+      for (i = 0; i < 1000; i++)	//this loop goes through each character one by one until it reaches 1000 character counts
 	{
-	  if (message[i] >= 'a' && message[i] <= 'z')
+	  if (key[i] >= 'a' && key[i] <= 'z')	//checks if key character is a lower case letter
 	    {
-	      message[i] = message[i] - 32;
+	      key[i] = key[i] - 32;	//if character is a lowercase, it gets converted to uppercase
 	    }
-	  if (message[i] >= 'A' && message[i] <= 'Z')
+	  if (message[i] >= 'a' && message[i] <= 'z')	//checks if message character is a lower case letter
 	    {
-	      message[i] = message[i] - userdefinedkey % 26;
-	      if (message[i] > 'Z')
-		{
-		  message[i] = message[i] - 26;
-		}
-	      else if (message[i] < 'A')
-		{
-		  message[i] = message[i] + 26;
-		}
+	      message[i] = message[i] - 32;	//if message is a lowercase it gets converted to uppercase
 	    }
-	  else
+	  if (message[i] == 'A')	//checks if message character is A
 	    {
-	      message[i] = message[i];
+	      message[i] = key[0];	//if message character is A, the new message is changed to the key character of position 1 in the key array
+	    }
+	  else if (message[i] == 'B')	//checks if message character is B
+	    {
+	      message[i] = key[1];	//if message character is A, the new message is changed to the key character of position 2 in the key array
+	    }
+	  else if (message[i] == 'C')	//checks if message character is C
+	    {
+	      message[i] = key[2];	//if message character is A, the new message is changed to the key character of position 3 in the key array
+	    }
+	  else if (message[i] == 'D')	//checks if message character is D
+	    {
+	      message[i] = key[3];	//if message character is A, the new message is changed to the key character of position 4 in the key array
+	    }
+	  else if (message[i] == 'E')	//checks if message character is E
+	    {
+	      message[i] = key[4];	//if message character is A, the new message is changed to the key character of position 5 in the key array
+	    }
+	  else if (message[i] == 'F')	//checks if message character is F
+	    {
+	      message[i] = key[5];	//if message character is A, the new message is changed to the key character of position 6 in the key array
+	    }
+	  else if (message[i] == 'G')	//checks if message character is G
+	    {
+	      message[i] = key[6];	//if message character is A, the new message is changed to the key character of position 7 in the key array
+	    }
+	  else if (message[i] == 'H')	//checks if message character is H
+	    {
+	      message[i] = key[7];	//if message character is A, the new message is changed to the key character of position 8 in the key array
+	    }
+	  else if (message[i] == 'I')	//checks if message character is I
+	    {
+	      message[i] = key[8];	//if message character is A, the new message is changed to the key character of position 9 in the key array
+	    }
+	  else if (message[i] == 'J')	//checks if message character is J
+	    {
+	      message[i] = key[9];	//if message character is A, the new message is changed to the key character of position 10 in the key array
+	    }
+	  else if (message[i] == 'K')	//checks if message character is K
+	    {
+	      message[i] = key[10];	//if message character is A, the new message is changed to the key character of position 11 in the key array
+	    }
+	  else if (message[i] == 'L')	//checks if message character is L
+	    {
+	      message[i] = key[11];	//if message character is A, the new message is changed to the key character of position 12 in the key array
+	    }
+	  else if (message[i] == 'M')	//checks if message character is M
+	    {
+	      message[i] = key[12];	//if message character is A, the new message is changed to the key character of position 13 in the key array
+	    }
+	  else if (message[i] == 'N')	//checks if message character is N
+	    {
+	      message[i] = key[13];	//if message character is A, the new message is changed to the key character of position 14 in the key array
+	    }
+	  else if (message[i] == 'O')	//checks if message character is O
+	    {
+	      message[i] = key[14];	//if message character is A, the new message is changed to the key character of position 15 in the key array
+	    }
+	  else if (message[i] == 'P')	//checks if message character is P
+	    {
+	      message[i] = key[15];	//if message character is A, the new message is changed to the key character of position 16 in the key array
+	    }
+	  else if (message[i] == 'Q')	//checks if message character is Q
+	    {
+	      message[i] = key[16];	//if message character is A, the new message is changed to the key character of position 17 in the key array
+	    }
+	  else if (message[i] == 'R')	//checks if message character is R
+	    {
+	      message[i] = key[17];	//if message character is A, the new message is changed to the key character of position 18 in the key array
+	    }
+	  else if (message[i] == 'S')	//checks if message character is S
+	    {
+	      message[i] = key[18];	//if message character is A, the new message is changed to the key character of position 19 in the key array
+	    }
+	  else if (message[i] == 'T')	//checks if message character is T
+	    {
+	      message[i] = key[19];	//if message character is A, the new message is changed to the key character of position 20 in the key array
+	    }
+	  else if (message[i] == 'U')	//checks if message character is U
+	    {
+	      message[i] = key[20];	//if message character is A, the new message is changed to the key character of position 21 in the key array
+	    }
+	  else if (message[i] == 'V')	//checks if message character is V
+	    {
+	      message[i] = key[21];	//if message character is A, the new message is changed to the key character of position 22 in the key array
+	    }
+	  else if (message[i] == 'W')	//checks if message character is W
+	    {
+	      message[i] = key[22];	//if message character is A, the new message is changed to the key character of position 23 in the key array
+	    }
+	  else if (message[i] == 'X')	//checks if message character is X
+	    {
+	      message[i] = key[23];	//if message character is A, the new message is changed to the key character of position 24 in the key array
+	    }
+	  else if (message[i] == 'Y')	//checks if message character is Y
+	    {
+	      message[i] = key[24];	//if message character is A, the new message is changed to the key character of position 25 in the key array
+	    }
+	  else if (message[i] == 'Z')	//checks if message character is Z
+	    {
+	      message[i] = key[25];	//if message character is A, the new message is changed to the key character of position 26 in the key array
+	    }
+	  else if (message[i] < 'A' || message[i] > 'Z')	//checks if message character out of range A-Z
+	    {
+	      message[i] = message[i];	//if the character is out of range, the character stays the same
 	    }
 	}
-      printf ("Decrypted Message: %s \n", message);
-      return main ();
-    case 3:
-      printf ("Substitution Encryption\nEnter A Message To Encrypt:\n");
-      scanf ("%[^\n]", message);
-      printf ("The Encryption Key Is: %s \n", key);
-      for (i = 0; i < 1000; i++)
+      printf ("Encrypted Message: %s \n", message);	//displays encrypted message to user
+      return main ();		//returns to main
+    case 4:			//this case decrypts a user entered message with a set key
+      printf ("Substitution Decryption\nEnter A Message To Decrypt:");	//displays message that substution decryption has been selected and prmompts user to enter in message
+      scanf ("%[^\n]", message);	//scans for entered in message
+      printf ("The Encryption Key Is: %s \n", key);	//prints the key used to decode the message
+      for (i = 0; i < 1000; i++)	//this loop goes through each character one by one until it reaches 1000 character counts
 	{
-	  if (key[i] >= 'a' && key[i] <= 'z')
+	  if (message[i] >= 'a' && message[i] <= 'z')	//checks if the message character is a lower case letter
 	    {
-	      key[i] = key[i] - 32;
+	      message[i] = message[i] - 32;	//if the message is a lower case letter it gets changed to its upper case
 	    }
-	  if (message[i] >= 'a' && message[i] <= 'z')
+	  if (message[i] < 'A' || message[i] > 'Z')	//checks if the message character is not an upper case letter
 	    {
-	      message[i] = message[i] - 32;
+	      message[i] = message[i];	//if the message character is not an upper case, the character stays the same
 	    }
-	  if (message[i] == 'A')
+	  else if (message[i] == 'Q')	//checks if message character is Q
 	    {
-	      message[i] = key[0];
+	      message[i] = plain[0];	//if message character is Q, the new message character is changed to the plain character of position 0 in the plain array
 	    }
-	  else if (message[i] == 'B')
+	  else if (message[i] == 'W')	//checks if message character is W
 	    {
-	      message[i] = key[1];
+	      message[i] = plain[1];	//if message character is W, the new message character is changed to the plain character of position 1 in the plain array
 	    }
-	  else if (message[i] == 'C')
+	  else if (message[i] == 'E')	//checks if message character is E
 	    {
-	      message[i] = key[2];
+	      message[i] = plain[2];	//if message character is E, the new message character is changed to the plain character of position 2 in the plain array
 	    }
-	  else if (message[i] == 'D')
+	  else if (message[i] == 'R')	//checks if message character is R
 	    {
-	      message[i] = key[3];
+	      message[i] = plain[3];	//if message character is R, the new message character is changed to the plain character of position 3 in the plain array
 	    }
-	  else if (message[i] == 'E')
+	  else if (message[i] == 'T')	//checks if message character is T
 	    {
-	      message[i] = key[4];
+	      message[i] = plain[4];	//if message character is T, the new message character is changed to the plain character of position 4 in the plain array
 	    }
-	  else if (message[i] == 'F')
+	  else if (message[i] == 'Y')	//checks if message character is Y
 	    {
-	      message[i] = key[5];
+	      message[i] = plain[5];	//if message character is Y, the new message character is changed to the plain character of position 5 in the plain array
 	    }
-	  else if (message[i] == 'G')
+	  else if (message[i] == 'U')	//checks if message character is U
 	    {
-	      message[i] = key[6];
+	      message[i] = plain[6];	//if message character is U, the new message character is changed to the plain character of position 6 in the plain array
 	    }
-	  else if (message[i] == 'H')
+	  else if (message[i] == 'I')	//checks if message character is I
 	    {
-	      message[i] = key[7];
+	      message[i] = plain[7];	//if message character is I, the new message character is changed to the plain character of position 7 in the plain array
 	    }
-	  else if (message[i] == 'I')
+	  else if (message[i] == 'O')	//checks if message character is O
 	    {
-	      message[i] = key[8];
+	      message[i] = plain[8];	//if message character is O, the new message character is changed to the plain character of position 8 in the plain array
 	    }
-	  else if (message[i] == 'J')
+	  else if (message[i] == 'P')	//checks if message character is P
 	    {
-	      message[i] = key[9];
+	      message[i] = plain[9];	//if message character is P, the new message character is changed to the plain character of position 9 in the plain array
 	    }
-	  else if (message[i] == 'K')
+	  else if (message[i] == 'A')	//checks if message character is A
 	    {
-	      message[i] = key[10];
+	      message[i] = plain[10];	//if message character is A, the new message character is changed to the plain character of position 10 in the plain array
 	    }
-	  else if (message[i] == 'L')
+	  else if (message[i] == 'S')	//checks if message character is S
 	    {
-	      message[i] = key[11];
+	      message[i] = plain[11];	//if message character is S, the new message character is changed to the plain character of position 11 in the plain array
 	    }
-	  else if (message[i] == 'M')
+	  else if (message[i] == 'D')	//checks if message character is D
 	    {
-	      message[i] = key[12];
+	      message[i] = plain[12];	//if message character is D, the new message character is changed to the plain character of position 12 in the plain array
 	    }
-	  else if (message[i] == 'N')
+	  else if (message[i] == 'F')	//checks if message character is F
 	    {
-	      message[i] = key[13];
+	      message[i] = plain[13];	//if message character is F, the new message character is changed to the plain character of position 13 in the plain array
 	    }
-	  else if (message[i] == 'O')
+	  else if (message[i] == 'G')	//checks if message character is G
 	    {
-	      message[i] = key[14];
+	      message[i] = plain[14];	//if message character is G, the new message character is changed to the plain character of position 14 in the plain array
 	    }
-	  else if (message[i] == 'P')
+	  else if (message[i] == 'H')	//checks if message character is H
 	    {
-	      message[i] = key[15];
+	      message[i] = plain[15];	//if message character is H, the new message character is changed to the plain character of position 15 in the plain array
 	    }
-	  else if (message[i] == 'Q')
+	  else if (message[i] == 'J')	//checks if message character is J
 	    {
-	      message[i] = key[16];
+	      message[i] = plain[16];	//if message character is J, the new message character is changed to the plain character of position 16 in the plain array
 	    }
-	  else if (message[i] == 'R')
+	  else if (message[i] == 'K')	//checks if message character is K
 	    {
-	      message[i] = key[17];
+	      message[i] = plain[17];	//if message character is K, the new message character is changed to the plain character of position 17 in the plain array
 	    }
-	  else if (message[i] == 'S')
+	  else if (message[i] == 'L')	//checks if message character is L
 	    {
-	      message[i] = key[18];
+	      message[i] = plain[18];	//if message character is L, the new message character is changed to the plain character of position 18 in the plain array
 	    }
-	  else if (message[i] == 'T')
+	  else if (message[i] == 'Z')	//checks if message character is Z
 	    {
-	      message[i] = key[19];
+	      message[i] = plain[19];	//if message character is Z, the new message character is changed to the plain character of position 19 in the plain array
 	    }
-	  else if (message[i] == 'U')
+	  else if (message[i] == 'X')	//checks if message character is X
 	    {
-	      message[i] = key[20];
+	      message[i] = plain[20];	//if message character is X, the new message character is changed to the plain character of position 20 in the plain array
 	    }
-	  else if (message[i] == 'V')
+	  else if (message[i] == 'C')	//checks if message character is C
 	    {
-	      message[i] = key[21];
+	      message[i] = plain[21];	//if message character is C, the new message character is changed to the plain character of position 21 in the plain array
 	    }
-	  else if (message[i] == 'W')
+	  else if (message[i] == 'V')	//checks if message character is V
 	    {
-	      message[i] = key[22];
+	      message[i] = plain[22];	//if message character is V, the new message character is changed to the plain character of position 22 in the plain array
 	    }
-	  else if (message[i] == 'X')
+	  else if (message[i] == 'B')	//checks if message character is B
 	    {
-	      message[i] = key[23];
+	      message[i] = plain[23];	//if message character is B, the new message character is changed to the plain character of position 23 in the plain array
 	    }
-	  else if (message[i] == 'Y')
+	  else if (message[i] == 'N')	//checks if message character is N
 	    {
-	      message[i] = key[24];
+	      message[i] = plain[24];	//if message character is N, the new message character is changed to the plain character of position 24 in the plain array
 	    }
-	  else if (message[i] == 'Z')
+	  else if (message[i] == 'M')	//checks if message character is M
 	    {
-	      message[i] = key[25];
-	    }
-	  else if (message[i] < 'A' || message[i] > 'Z')
-	    {
-	      message[i] = message[i];
+	      message[i] = plain[25];	//if message character is M, the new message character is changed to the plain character of position 25 in the plain array
 	    }
 	}
-      printf ("Encrypted Message: %s \n\n", message);
-      return main ();
-    case 4:
-      printf ("Substitution Decryption\nEnter A Message To Decrypt:");
-      scanf ("%[^\n]", message);
-      printf ("The Encryption Key Is: %s \n", key);
-
-      for (i = 0; i < 20; i++)
-	{
-	  if (message[i] >= 'a' && message[i] <= 'z')
-	    {
-	      message[i] = message[i] - 32;
-	    }
-	  if (message[i] < 'A' || message[i] > 'Z')
-	    {
-	      message[i] = message[i];
-	    }
-	  else if (message[i] == 'Q')
-	    {
-	      message[i] = plain[0];
-	    }
-	  else if (message[i] == 'W')
-	    {
-	      message[i] = plain[1];
-	    }
-	  else if (message[i] == 'E')
-	    {
-	      message[i] = plain[2];
-	    }
-	  else if (message[i] == 'R')
-	    {
-	      message[i] = plain[3];
-	    }
-	  else if (message[i] == 'T')
-	    {
-	      message[i] = plain[4];
-	    }
-	  else if (message[i] == 'Y')
-	    {
-	      message[i] = plain[5];
-	    }
-	  else if (message[i] == 'U')
-	    {
-	      message[i] = plain[6];
-	    }
-	  else if (message[i] == 'I')
-	    {
-	      message[i] = plain[7];
-	    }
-	  else if (message[i] == 'O')
-	    {
-	      message[i] = plain[8];
-	    }
-	  else if (message[i] == 'P')
-	    {
-	      message[i] = plain[9];
-	    }
-	  else if (message[i] == 'A')
-	    {
-	      message[i] = plain[10];
-	    }
-	  else if (message[i] == 'S')
-	    {
-	      message[i] = plain[11];
-	    }
-	  else if (message[i] == 'D')
-	    {
-	      message[i] = plain[12];
-	    }
-	  else if (message[i] == 'F')
-	    {
-	      message[i] = plain[13];
-	    }
-	  else if (message[i] == 'G')
-	    {
-	      message[i] = plain[14];
-	    }
-	  else if (message[i] == 'H')
-	    {
-	      message[i] = plain[15];
-	    }
-	  else if (message[i] == 'J')
-	    {
-	      message[i] = plain[16];
-	    }
-	  else if (message[i] == 'K')
-	    {
-	      message[i] = plain[17];
-	    }
-	  else if (message[i] == 'L')
-	    {
-	      message[i] = plain[18];
-	    }
-	  else if (message[i] == 'Z')
-	    {
-	      message[i] = plain[19];
-	    }
-	  else if (message[i] == 'X')
-	    {
-	      message[i] = plain[20];
-	    }
-	  else if (message[i] == 'C')
-	    {
-	      message[i] = plain[21];
-	    }
-	  else if (message[i] == 'V')
-	    {
-	      message[i] = plain[22];
-	    }
-	  else if (message[i] == 'B')
-	    {
-	      message[i] = plain[23];
-	    }
-	  else if (message[i] == 'N')
-	    {
-	      message[i] = plain[24];
-	    }
-	  else if (message[i] == 'M')
-	    {
-	      message[i] = plain[25];
-	    }
-	}
-      printf ("Decrypted Message: %s \n\n", message);
-      return main ();
+      printf ("Decrypted Message: %s \n", message);	//prints decrypted message to user
+      return main ();		//returns back to main menu
     case 5:
+
+      //note, case 5 did not work exactly how i planned on
+
+
       printf ("Rotation Decryption, Text Only\n");
 
       int crackrotationkey;
@@ -844,14 +845,9 @@ printf("frequency of Y %d\n", fY);
 printf("frequency of Z %d\n", fZ);
 printf("total letters %d\n", totalLetters);
 */
-      //return main ();
+      //return main (); break;
     case 6:
-      printf ("Substitution Decryption, Text Only\n");
-      break;
-    case 7:
       return 0;
-      break;
-    default:
-      printf ("enter a number\n");
+    default:;
     }
 }
